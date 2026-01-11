@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Docker Course - Learn Docker from Basics to Advanced</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🐳%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">🐳</span>
+                <span class="logo-text">Docker Course</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="#about">About</a>
+                <a href="#modules">Modules</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Master Docker: Interactive Learning Journey</h1>
+            <p class="hero-subtitle">From containers basics to orchestration - Learn Docker hands-on with interactive exercises, quizzes, and real-world projects</p>
+            <div class="hero-buttons">
+                <a href="modules/module1.html" class="btn btn-primary">Start Learning</a>
+                <a href="#modules" class="btn btn-secondary">View Modules</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="docker-diagram">
+                <div class="diagram-container">
+                    <svg viewBox="0 0 400 300" class="architecture-diagram">
+                        <!-- Docker Client -->
+                        <g class="diagram-element">
+                            <rect x="30" y="120" width="100" height="60" rx="5" fill="#0db7ed" opacity="0.9"/>
+                            <text x="80" y="155" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Docker Client</text>
+                        </g>
+                        
+                        <!-- Docker Daemon -->
+                        <g class="diagram-element">
+                            <rect x="200" y="120" width="100" height="60" rx="5" fill="#384d54" opacity="0.9"/>
+                            <text x="250" y="155" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Docker Daemon</text>
+                        </g>
+                        
+                        <!-- Docker Registry -->
+                        <g class="diagram-element">
+                            <rect x="200" y="30" width="100" height="60" rx="5" fill="#0db7ed" opacity="0.9"/>
+                            <text x="250" y="65" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Docker Registry</text>
+                        </g>
+                        
+                        <!-- Containers -->
+                        <g class="diagram-element">
+                            <rect x="200" y="210" width="45" height="50" rx="3" fill="#2496ed" opacity="0.8"/>
+                            <text x="222.5" y="240" text-anchor="middle" fill="white" font-size="11">Container</text>
+                        </g>
+                        <g class="diagram-element">
+                            <rect x="255" y="210" width="45" height="50" rx="3" fill="#2496ed" opacity="0.8"/>
+                            <text x="277.5" y="240" text-anchor="middle" fill="white" font-size="11">Container</text>
+                        </g>
+                        
+                        <!-- Arrows -->
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#0db7ed" />
+                            </marker>
+                        </defs>
+                        <line x1="130" y1="150" x2="195" y2="150" stroke="#0db7ed" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <line x1="250" y1="90" x2="250" y2="115" stroke="#0db7ed" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <line x1="250" y1="180" x2="250" y2="205" stroke="#0db7ed" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        
+                        <!-- Labels -->
+                        <text x="162" y="140" text-anchor="middle" fill="#0db7ed" font-size="10">REST API</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="section about-section">
+        <div class="container">
+            <h2 class="section-title">About This Course</h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="about-icon">🎯</div>
+                    <h3>Hands-on Learning</h3>
+                    <p>Interactive exercises with real Docker commands, Dockerfiles, and compose files</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon">📚</div>
+                    <h3>Comprehensive Curriculum</h3>
+                    <p>11 modules covering from basics to orchestration with Docker Swarm</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon">✅</div>
+                    <h3>Quizzes & Assessments</h3>
+                    <p>Test your knowledge with interactive quizzes and receive immediate feedback</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon">🚀</div>
+                    <h3>Self-Paced</h3>
+                    <p>Learn at your own speed with hints and solutions available when needed</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="modules" class="section modules-section">
+        <div class="container">
+            <h2 class="section-title">Course Modules</h2>
+            <div class="modules-grid">
+                <a href="modules/module1.html" class="module-card">
+                    <div class="module-number">01</div>
+                    <h3 class="module-title">Introduction to Containers</h3>
+                    <p class="module-description">Learn what containers are and how they differ from virtual machines</p>
+                    <div class="module-topics">
+                        <span class="topic-tag">Containers</span>
+                        <span class="topic-tag">VMs</span>
+                        <span class="topic-tag">Namespaces</span>
+                    </div>
+                </a>
+
+                <a href="modules/module2.html" class="module-card">
+                    <div class="module-number">02</div>
+                    <h3 class="module-title">Docker Architecture & CLI</h3>
+                    <p class="module-description">Understand Docker's client-server architecture and master basic CLI commands</p>
+                    <div class="module-topics">
+                        <span class="topic-tag">CLI</span>
+                        <span class="topic-tag">Daemon</span>
+                        <span class="topic-tag">Registry</span>
+                    </div>
+                </a>
+
+                <a href="modules/module3.html" class="module-card">
+                    <div class="module-number">03</div>
+                    <h3 class="module-title">Images & Image Creation</h3>
+                    <p class="module-description">Build, tag, and distribute Docker images using Dockerfiles</p>
+                    <div class="module-topics">
+                        <span class="topic-tag">Dockerfile</span>
+                        <span class="topic-tag">Layers</span>
+                        <span class="topic-tag">Tags</span>
+                    </div>
+                </a>
+
+                <a href="modules/module4.html" class="module-card">
+                    <div class="module-number">04</div>
+                    <h3 class="module-title">Managing Containers</h3>
+                    <p class="module-description">Run, monitor, and control container lifecycle with advanced options</p>
+                    <div class="module-topics">
+                        <span class="topic-tag">Lifecycle</span>
+                        <span class="topic-tag">Logs</span>
+                        <span class="topic-tag">Exec</span>
+                    </div>
+                </a>
+
+                <a href="modules/module5.html" class="module-card">
+                    <div class="module-number">05</div>
+                    <h3 class="module-title">Persistent Storage</h3>
+                    <p class="module-description">Persist data with volumes and share data between containers</p>
+                    <div class="module-topics">
+                        <span class="topic-tag">Volumes</span>
+                        <span class="topic-tag">Bind Mounts</span>
+                        <span class="topic-tag">Storage</span>
+                    </div>
+                </a>
+
+                <a href="modules/module6.html" class="module-card">
+                    <div class="module-number">06</div>
+                    <h3 class="module-title">Networking & Connectivity</h3>
+                    <p class="module-description">Configure networks, drivers, and enable container communication</p>
+                    <div class="module-topics">
+                        <span class="topic-tag">Bridge</span>
+                        <span class="topic-tag">Overlay</span>
+                        <span class="topic-tag">Ports</span>
+                    </div>
+                </a>
+
+                <a href="modules/module7.html" class="module-card">
+                    <div class="module-number">07</div>
+                    <h3 class="module-title">Docker Compose</h3>
+                    <p class="module-description">Orchestrate multi-container applications with docker-compose.yml</p>
+                    <div class="module-topics">
+                        <span class="topic-tag">Compose</span>
+                        <span class="topic-tag">YAML</span>
+                        <span class="topic-tag">Services</span>
+                    </div>
+                </a>
+
+                <a href="modules/module8.html" class="module-card">
+                    <div class="module-number">08</div>
+                    <h3 class="module-title">Dockerfile Best Practices</h3>
+                    <p class="module-description">Optimize images with multi-stage builds and security best practices</p>
+                    <div class="module-topics">
+                        <span class="topic-tag">Multi-stage</span>
+                        <span class="topic-tag">Security</span>
+                        <span class="topic-tag">Optimization</span>
+                    </div>
+                </a>
+
+                <a href="modules/module9.html" class="module-card">
+                    <div class="module-number">09</div>
+                    <h3 class="module-title">Docker Swarm</h3>
+                    <p class="module-description">Deploy and manage services with Docker's built-in orchestration</p>
+                    <div class="module-topics">
+                        <span class="topic-tag">Swarm</span>
+                        <span class="topic-tag">Services</span>
+                        <span class="topic-tag">Scaling</span>
+                    </div>
+                </a>
+
+                <a href="modules/module10.html" class="module-card">
+                    <div class="module-number">10</div>
+                    <h3 class="module-title">Security Basics</h3>
+                    <p class="module-description">Apply security best practices and harden your containers</p>
+                    <div class="module-topics">
+                        <span class="topic-tag">Security</span>
+                        <span class="topic-tag">Scanning</span>
+                        <span class="topic-tag">Hardening</span>
+                    </div>
+                </a>
+
+                <a href="modules/module11.html" class="module-card">
+                    <div class="module-number">11</div>
+                    <h3 class="module-title">Final Project</h3>
+                    <p class="module-description">Build an end-to-end microservice application with everything you learned</p>
+                    <div class="module-topics">
+                        <span class="topic-tag">Project</span>
+                        <span class="topic-tag">Integration</span>
+                        <span class="topic-tag">Practice</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Master Docker?</h2>
+                <p>Start your journey from container basics to advanced orchestration</p>
+                <a href="modules/module1.html" class="btn btn-primary btn-lg">Begin Module 1</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Interactive Docker Course. Learn Docker hands-on.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

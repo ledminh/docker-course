@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 1: Introduction to Containers and Virtualisation - Docker Course</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🐳%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">🐳</span>
+                <span class="logo-text">Docker Course</span>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="#" class="active">Module 1</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="module-header">
+        <div class="container">
+            <h1>Module 1: Introduction to Containers and Virtualisation</h1>
+            <p>Learn what containers are and how they differ from virtual machines</p>
+            <div class="module-nav">
+                <a href="../index.html" class="btn btn-secondary">← Back to Home</a>
+                <a href="module2.html" class="btn btn-primary">Next Module →</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="progress-indicator">
+        <h4>Module Progress</h4>
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: 0%"></div>
+        </div>
+    </div>
+
+    <main class="module-content">
+        <section class="objectives">
+            <h3>🎯 Learning Objectives</h3>
+            <ul>
+                <li>Define what a container is and explain how it differs from a virtual machine</li>
+                <li>Recognize that containers share the host kernel but run in isolated namespaces and cgroups</li>
+                <li>Understand the benefits of containerisation for application consistency and portability</li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h2>What is a Container?</h2>
+            <p>
+                A <strong>container</strong> is a lightweight, standalone, executable package that includes everything needed to run a piece of software: 
+                code, runtime, system tools, system libraries, and settings. Unlike virtual machines, containers share the host operating system's kernel, 
+                making them much more efficient in terms of resource usage and startup time.
+            </p>
+            
+            <div class="info-box">
+                <h4>💡 Key Concept</h4>
+                <p>
+                    Think of containers as isolated processes running on your host machine. They appear to have their own file system, network, and process space, 
+                    but they're actually sharing the underlying kernel with the host OS.
+                </p>
+            </div>
+
+            <div class="diagram">
+                <h3>Container Architecture</h3>
+                <svg viewBox="0 0 600 350" style="max-width: 600px; margin: 0 auto; display: block;">
+                    <!-- Host OS -->
+                    <rect x="50" y="280" width="500" height="50" fill="#384d54" rx="5"/>
+                    <text x="300" y="310" text-anchor="middle" fill="white" font-size="16" font-weight="bold">Host Operating System (Linux Kernel)</text>
+                    
+                    <!-- Docker Engine -->
+                    <rect x="50" y="220" width="500" height="50" fill="#0db7ed" rx="5"/>
+                    <text x="300" y="250" text-anchor="middle" fill="white" font-size="16" font-weight="bold">Docker Engine (Container Runtime)</text>
+                    
+                    <!-- Container 1 -->
+                    <g>
+                        <rect x="60" y="80" width="150" height="130" fill="#2496ed" opacity="0.9" rx="5"/>
+                        <text x="135" y="105" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Container 1</text>
+                        <rect x="70" y="115" width="130" height="30" fill="#1976d2" rx="3"/>
+                        <text x="135" y="135" text-anchor="middle" fill="white" font-size="11">App A</text>
+                        <rect x="70" y="150" width="130" height="25" fill="#1565c0" rx="3"/>
+                        <text x="135" y="167" text-anchor="middle" fill="white" font-size="10">Libraries</text>
+                        <rect x="70" y="180" width="130" height="20" fill="#0d47a1" rx="3"/>
+                        <text x="135" y="193" text-anchor="middle" fill="white" font-size="9">Dependencies</text>
+                    </g>
+                    
+                    <!-- Container 2 -->
+                    <g>
+                        <rect x="225" y="80" width="150" height="130" fill="#2496ed" opacity="0.9" rx="5"/>
+                        <text x="300" y="105" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Container 2</text>
+                        <rect x="235" y="115" width="130" height="30" fill="#1976d2" rx="3"/>
+                        <text x="300" y="135" text-anchor="middle" fill="white" font-size="11">App B</text>
+                        <rect x="235" y="150" width="130" height="25" fill="#1565c0" rx="3"/>
+                        <text x="300" y="167" text-anchor="middle" fill="white" font-size="10">Libraries</text>
+                        <rect x="235" y="180" width="130" height="20" fill="#0d47a1" rx="3"/>
+                        <text x="300" y="193" text-anchor="middle" fill="white" font-size="9">Dependencies</text>
+                    </g>
+                    
+                    <!-- Container 3 -->
+                    <g>
+                        <rect x="390" y="80" width="150" height="130" fill="#2496ed" opacity="0.9" rx="5"/>
+                        <text x="465" y="105" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Container 3</text>
+                        <rect x="400" y="115" width="130" height="30" fill="#1976d2" rx="3"/>
+                        <text x="465" y="135" text-anchor="middle" fill="white" font-size="11">App C</text>
+                        <rect x="400" y="150" width="130" height="25" fill="#1565c0" rx="3"/>
+                        <text x="465" y="167" text-anchor="middle" fill="white" font-size="10">Libraries</text>
+                        <rect x="400" y="180" width="130" height="20" fill="#0d47a1" rx="3"/>
+                        <text x="465" y="193" text-anchor="middle" fill="white" font-size="9">Dependencies</text>
+                    </g>
+                    
+                    <!-- Title -->
+                    <text x="300" y="30" text-anchor="middle" fill="#384d54" font-size="18" font-weight="bold">Containers on Shared Kernel</text>
+                    <text x="300" y="50" text-anchor="middle" fill="#666" font-size="12">Multiple isolated applications running on the same OS</text>
+                </svg>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2>Containers vs Virtual Machines</h2>
+            <p>
+                Understanding the difference between containers and virtual machines (VMs) is crucial for appreciating Docker's benefits. 
+                While both provide isolation, they achieve it in fundamentally different ways.
+            </p>
+
+            <div class="diagram">
+                <h3>Virtual Machines Architecture</h3>
+                <svg viewBox="0 0 600 400" style="max-width: 600px; margin: 0 auto; display: block;">
+                    <!-- Physical Server -->
+                    <rect x="50" y="350" width="500" height="40" fill="#263238" rx="5"/>
+                    <text x="300" y="375" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Physical Server (Hardware)</text>
+                    
+                    <!-- Host OS -->
+                    <rect x="50" y="300" width="500" height="40" fill="#37474f" rx="5"/>
+                    <text x="300" y="325" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Host Operating System</text>
+                    
+                    <!-- Hypervisor -->
+                    <rect x="50" y="250" width="500" height="40" fill="#455a64" rx="5"/>
+                    <text x="300" y="275" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Hypervisor (VMware, VirtualBox, etc.)</text>
+                    
+                    <!-- VM 1 -->
+                    <g>
+                        <rect x="60" y="70" width="150" height="170" fill="#90a4ae" opacity="0.9" rx="5"/>
+                        <text x="135" y="95" text-anchor="middle" fill="white" font-size="14" font-weight="bold">VM 1</text>
+                        <rect x="70" y="105" width="130" height="30" fill="#607d8b" rx="3"/>
+                        <text x="135" y="125" text-anchor="middle" fill="white" font-size="11">App A</text>
+                        <rect x="70" y="140" width="130" height="25" fill="#546e7a" rx="3"/>
+                        <text x="135" y="157" text-anchor="middle" fill="white" font-size="10">Binaries/Libs</text>
+                        <rect x="70" y="170" width="130" height="60" fill="#455a64" rx="3"/>
+                        <text x="135" y="195" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Guest OS</text>
+                        <text x="135" y="210" text-anchor="middle" fill="white" font-size="9">(Linux)</text>
+                    </g>
+                    
+                    <!-- VM 2 -->
+                    <g>
+                        <rect x="225" y="70" width="150" height="170" fill="#90a4ae" opacity="0.9" rx="5"/>
+                        <text x="300" y="95" text-anchor="middle" fill="white" font-size="14" font-weight="bold">VM 2</text>
+                        <rect x="235" y="105" width="130" height="30" fill="#607d8b" rx="3"/>
+                        <text x="300" y="125" text-anchor="middle" fill="white" font-size="11">App B</text>
+                        <rect x="235" y="140" width="130" height="25" fill="#546e7a" rx="3"/>
+                        <text x="300" y="157" text-anchor="middle" fill="white" font-size="10">Binaries/Libs</text>
+                        <rect x="235" y="170" width="130" height="60" fill="#455a64" rx="3"/>
+                        <text x="300" y="195" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Guest OS</text>
+                        <text x="300" y="210" text-anchor="middle" fill="white" font-size="9">(Windows)</text>
+                    </g>
+                    
+                    <!-- VM 3 -->
+                    <g>
+                        <rect x="390" y="70" width="150" height="170" fill="#90a4ae" opacity="0.9" rx="5"/>
+                        <text x="465" y="95" text-anchor="middle" fill="white" font-size="14" font-weight="bold">VM 3</text>
+                        <rect x="400" y="105" width="130" height="30" fill="#607d8b" rx="3"/>
+                        <text x="465" y="125" text-anchor="middle" fill="white" font-size="11">App C</text>
+                        <rect x="400" y="140" width="130" height="25" fill="#546e7a" rx="3"/>
+                        <text x="465" y="157" text-anchor="middle" fill="white" font-size="10">Binaries/Libs</text>
+                        <rect x="400" y="170" width="130" height="60" fill="#455a64" rx="3"/>
+                        <text x="465" y="195" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Guest OS</text>
+                        <text x="465" y="210" text-anchor="middle" fill="white" font-size="9">(Linux)</text>
+                    </g>
+                    
+                    <!-- Title -->
+                    <text x="300" y="30" text-anchor="middle" fill="#263238" font-size="18" font-weight="bold">Virtual Machines with Hypervisor</text>
+                    <text x="300" y="50" text-anchor="middle" fill="#666" font-size="12">Each VM runs a complete operating system</text>
+                </svg>
+            </div>
+
+            <h3>Key Differences</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>Containers</th>
+                        <th>Virtual Machines</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Operating System</strong></td>
+                        <td>Share host OS kernel</td>
+                        <td>Each VM has full guest OS</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Size</strong></td>
+                        <td>Lightweight (MBs)</td>
+                        <td>Heavy (GBs)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Startup Time</strong></td>
+                        <td>Seconds or less</td>
+                        <td>Minutes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Resource Usage</strong></td>
+                        <td>Minimal overhead</td>
+                        <td>Significant overhead</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Isolation Level</strong></td>
+                        <td>Process-level isolation</td>
+                        <td>Full OS-level isolation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Portability</strong></td>
+                        <td>Highly portable</td>
+                        <td>Less portable</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Density</strong></td>
+                        <td>Can run many on same host</td>
+                        <td>Limited by resources</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="content-section">
+            <h2>How Containers Achieve Isolation</h2>
+            <p>
+                Containers use Linux kernel features to provide isolation without the overhead of a full virtual machine:
+            </p>
+
+            <h3>1. Namespaces</h3>
+            <p>
+                Namespaces provide isolated views of system resources. Each container gets its own:
+            </p>
+            <ul>
+                <li><strong>PID namespace:</strong> Process IDs - containers see their own process tree</li>
+                <li><strong>Network namespace:</strong> Network interfaces, IP addresses, routing tables</li>
+                <li><strong>Mount namespace:</strong> File system mount points</li>
+                <li><strong>IPC namespace:</strong> Inter-process communication resources</li>
+                <li><strong>UTS namespace:</strong> Hostname and domain name</li>
+                <li><strong>User namespace:</strong> User and group IDs</li>
+            </ul>
+
+            <div class="info-box">
+                <h4>🔍 Example</h4>
+                <p>
+                    When you run <code>ps aux</code> inside a container, you only see the processes running in that container, 
+                    not the processes from the host or other containers. This is thanks to PID namespaces!
+                </p>
+            </div>
+
+            <h3>2. Control Groups (cgroups)</h3>
+            <p>
+                Control groups limit and account for resource usage:
+            </p>
+            <ul>
+                <li><strong>CPU:</strong> Limit CPU usage and set CPU priorities</li>
+                <li><strong>Memory:</strong> Set memory limits and prevent containers from using too much RAM</li>
+                <li><strong>Disk I/O:</strong> Control read/write speeds</li>
+                <li><strong>Network:</strong> Bandwidth limitations</li>
+            </ul>
+
+            <div class="diagram">
+                <h3>Container Isolation Mechanisms</h3>
+                <svg viewBox="0 0 600 300" style="max-width: 600px; margin: 0 auto; display: block;">
+                    <!-- Container box -->
+                    <rect x="50" y="50" width="500" height="200" fill="#e3f2fd" stroke="#2196f3" stroke-width="3" rx="10"/>
+                    <text x="300" y="35" text-anchor="middle" fill="#1565c0" font-size="18" font-weight="bold">Container Isolation</text>
+                    
+                    <!-- Namespaces section -->
+                    <g>
+                        <rect x="70" y="70" width="220" height="160" fill="#bbdefb" stroke="#1976d2" stroke-width="2" rx="5"/>
+                        <text x="180" y="95" text-anchor="middle" fill="#0d47a1" font-size="14" font-weight="bold">Namespaces</text>
+                        <text x="80" y="120" fill="#1565c0" font-size="11">• PID (Process isolation)</text>
+                        <text x="80" y="140" fill="#1565c0" font-size="11">• NET (Network isolation)</text>
+                        <text x="80" y="160" fill="#1565c0" font-size="11">• MNT (Filesystem isolation)</text>
+                        <text x="80" y="180" fill="#1565c0" font-size="11">• IPC (Communication isolation)</text>
+                        <text x="80" y="200" fill="#1565c0" font-size="11">• UTS (Hostname isolation)</text>
+                        <text x="80" y="220" fill="#1565c0" font-size="11">• USER (User ID isolation)</text>
+                    </g>
+                    
+                    <!-- Cgroups section -->
+                    <g>
+                        <rect x="310" y="70" width="220" height="160" fill="#c8e6c9" stroke="#4caf50" stroke-width="2" rx="5"/>
+                        <text x="420" y="95" text-anchor="middle" fill="#1b5e20" font-size="14" font-weight="bold">Control Groups</text>
+                        <text x="320" y="120" fill="#2e7d32" font-size="11">• CPU (Limit CPU usage)</text>
+                        <text x="320" y="140" fill="#2e7d32" font-size="11">• Memory (RAM limits)</text>
+                        <text x="320" y="160" fill="#2e7d32" font-size="11">• Disk I/O (Read/write limits)</text>
+                        <text x="320" y="180" fill="#2e7d32" font-size="11">• Network (Bandwidth control)</text>
+                        <text x="320" y="200" fill="#2e7d32" font-size="11">• Devices (Device access)</text>
+                    </g>
+                </svg>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2>Benefits of Containerisation</h2>
+            
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="about-icon">🚀</div>
+                    <h3>Fast & Lightweight</h3>
+                    <p>Containers start in seconds and use minimal resources compared to VMs</p>
+                </div>
+                
+                <div class="about-card">
+                    <div class="about-icon">📦</div>
+                    <h3>Consistency</h3>
+                    <p>"Works on my machine" becomes "works everywhere" - same container runs identically across environments</p>
+                </div>
+                
+                <div class="about-card">
+                    <div class="about-icon">🔄</div>
+                    <h3>Portability</h3>
+                    <p>Build once, run anywhere - on local dev, staging, production, cloud, or on-premises</p>
+                </div>
+                
+                <div class="about-card">
+                    <div class="about-icon">⚡</div>
+                    <h3>Efficiency</h3>
+                    <p>Run many more containers than VMs on the same hardware due to lower overhead</p>
+                </div>
+                
+                <div class="about-card">
+                    <div class="about-icon">🔧</div>
+                    <h3>Easy Maintenance</h3>
+                    <p>Update applications without affecting the host system or other containers</p>
+                </div>
+                
+                <div class="about-card">
+                    <div class="about-icon">🎯</div>
+                    <h3>Microservices</h3>
+                    <p>Perfect for microservice architectures - each service runs in its own container</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2>Hands-on Exercise: Verify Docker Installation</h2>
+            
+            <div class="exercise">
+                <h3>📝 Exercise 1: Check Docker Version and Info</h3>
+                <p>Let's verify that Docker is installed and running on your system.</p>
+                
+                <ol class="exercise-steps">
+                    <li>Open your terminal or command prompt</li>
+                    <li>Run the following command to check Docker version:</li>
+                </ol>
+
+                <div class="code-header">Command</div>
+                <div class="code-block">
+<pre><code>docker version</code></pre>
+                </div>
+
+                <p>This command shows both the client and server (daemon) versions. You should see output like:</p>
+
+                <div class="code-header">Expected Output</div>
+                <div class="code-block">
+<pre><code>Client: Docker Engine - Community
+ Version:           24.0.7
+ API version:       1.43
+ Go version:        go1.20.10
+ Git commit:        afdd53b
+ Built:             Thu Oct 26 09:07:41 2023
+ OS/Arch:           linux/amd64
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          24.0.7
+  API version:      1.43 (minimum version 1.12)
+  Go version:       go1.20.10
+  Git commit:       311b9ff
+  Built:            Thu Oct 26 09:07:41 2023
+  OS/Arch:          linux/amd64</code></pre>
+                </div>
+
+                <ol class="exercise-steps" start="3">
+                    <li>Now run this command to get detailed information about your Docker installation:</li>
+                </ol>
+
+                <div class="code-header">Command</div>
+                <div class="code-block">
+<pre><code>docker info</code></pre>
+                </div>
+
+                <p>This displays comprehensive information including:</p>
+                <ul>
+                    <li>Number of containers (running, paused, stopped)</li>
+                    <li>Number of images</li>
+                    <li>Storage driver in use</li>
+                    <li>Host kernel version</li>
+                    <li>Operating system</li>
+                    <li>Total memory and CPUs</li>
+                </ul>
+            </div>
+
+            <div class="hint-box">
+                <button class="hint-toggle">💡 Show Hint</button>
+                <div class="hint-content">
+                    <p><strong>Troubleshooting:</strong></p>
+                    <ul>
+                        <li>If you get "command not found", Docker might not be installed. Install Docker Desktop (Windows/Mac) or Docker Engine (Linux)</li>
+                        <li>If you get "permission denied", you might need to use <code>sudo</code> on Linux or add your user to the docker group</li>
+                        <li>On Windows/Mac, make sure Docker Desktop is running (check the system tray icon)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="success-box">
+                <h4>✅ What You Learned</h4>
+                <p>
+                    By running these commands, you've confirmed that both the Docker client (CLI) and Docker daemon (server) are running. 
+                    The <code>docker info</code> command showed you details about the host system, including the kernel version that all 
+                    containers on this host will share!
+                </p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2>Knowledge Check</h2>
+            
+            <div class="quiz">
+                <h3>🧠 Quiz: Test Your Understanding</h3>
+                
+                <div class="quiz-question">
+                    <p><strong>Question 1:</strong> What is the main difference between containers and virtual machines?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false" data-explanation="While VMs do provide isolation, this isn't the key difference.">
+                            a) Virtual machines provide better isolation
+                        </div>
+                        <div class="quiz-option" data-correct="true" data-explanation="Correct! Containers share the host OS kernel, while VMs run a full guest OS.">
+                            b) Containers share the host OS kernel, while VMs run a complete guest operating system
+                        </div>
+                        <div class="quiz-option" data-correct="false" data-explanation="Actually, containers are much faster to start than VMs!">
+                            c) Virtual machines start faster than containers
+                        </div>
+                        <div class="quiz-option" data-correct="false" data-explanation="Both can run multiple applications, though containers are more efficient.">
+                            d) Containers can only run one application at a time
+                        </div>
+                    </div>
+                    <button class="btn btn-primary quiz-submit">Submit Answer</button>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+
+            <div class="quiz">
+                <div class="quiz-question">
+                    <p><strong>Question 2:</strong> Which Linux kernel feature provides process isolation for containers?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false" data-explanation="Cgroups limit resources, but don't provide isolation.">
+                            a) Control groups (cgroups)
+                        </div>
+                        <div class="quiz-option" data-correct="true" data-explanation="Correct! Namespaces provide isolated views of system resources like processes, network, and filesystem.">
+                            b) Namespaces
+                        </div>
+                        <div class="quiz-option" data-correct="false" data-explanation="The hypervisor is used by VMs, not containers.">
+                            c) Hypervisor
+                        </div>
+                        <div class="quiz-option" data-correct="false" data-explanation="SELinux provides security, but doesn't create process isolation.">
+                            d) SELinux
+                        </div>
+                    </div>
+                    <button class="btn btn-primary quiz-submit">Submit Answer</button>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+
+            <div class="quiz">
+                <div class="quiz-question">
+                    <p><strong>Question 3:</strong> Why do containers start faster than virtual machines?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false" data-explanation="While containers are smaller, this isn't the primary reason for faster startup.">
+                            a) Containers are smaller in size
+                        </div>
+                        <div class="quiz-option" data-correct="false" data-explanation="Actually, containers use less CPU than VMs!">
+                            b) Containers use more CPU resources
+                        </div>
+                        <div class="quiz-option" data-correct="true" data-explanation="Correct! Containers are just processes, so they start immediately. VMs need to boot an entire OS.">
+                            c) Containers don't need to boot an operating system - they're just processes
+                        </div>
+                        <div class="quiz-option" data-correct="false" data-explanation="Containers actually have lower overhead than VMs.">
+                            d) Containers have more overhead
+                        </div>
+                    </div>
+                    <button class="btn btn-primary quiz-submit">Submit Answer</button>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2>Summary</h2>
+            <p>
+                In this module, you learned the fundamental differences between containers and virtual machines. Key takeaways:
+            </p>
+            <ul>
+                <li>Containers are lightweight, isolated processes that share the host OS kernel</li>
+                <li>Virtual machines run complete operating systems on a hypervisor</li>
+                <li>Linux namespaces provide process-level isolation for containers</li>
+                <li>Control groups (cgroups) limit and manage resource usage</li>
+                <li>Containers are faster, more efficient, and more portable than VMs</li>
+                <li>Docker leverages these kernel features to provide containerization</li>
+            </ul>
+
+            <div class="info-box">
+                <h4>🎓 Next Steps</h4>
+                <p>
+                    Now that you understand what containers are, you're ready to dive into Docker's architecture and learn how to use 
+                    the Docker CLI to manage containers. In Module 2, we'll explore the client-server architecture and master basic 
+                    Docker commands!
+                </p>
+            </div>
+        </section>
+
+        <div class="module-nav" style="margin-top: 3rem;">
+            <a href="../index.html" class="btn btn-secondary">← Back to Home</a>
+            <a href="module2.html" class="btn btn-primary">Next: Docker Architecture & CLI →</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Interactive Docker Course. Module 1: Introduction to Containers and Virtualisation</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
